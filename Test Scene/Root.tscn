@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbnkh2v7bujoj"]
+
+[ext_resource type="Texture2D" uid="uid://bb021qemx2tw1" path="res://Test Scene/Prototype_Grid_Gray_04-512x512.png" id="1_16bn6"]
+[ext_resource type="PackedScene" uid="uid://c4ewlceey6ej7" path="res://Character/character_body.tscn" id="2_qxfrk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxfrk"]
+albedo_color = Color(0.62352943, 0.6117647, 1, 1)
+albedo_texture = ExtResource("1_16bn6")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_a0tk4"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r3fl7"]
+points = PackedVector3Array(-0.50793654, -0.50793654, -0.007936508, 0.50793654, 0.50793654, 0.007936508, 0.50793654, 0.50793654, -0.007936508, -0.50793654, 0.50793654, 0.007936508, 0.50793654, -0.50793654, 0.007936508, 0.50793654, -0.50793654, -0.007936508, -0.50793654, 0.50793654, -0.007936508, -0.50793654, -0.50793654, 0.007936508)
+
+[sub_resource type="BoxMesh" id="BoxMesh_16bn6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qxfrk"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Plane" type="StaticBody3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, -4.371139e-06, 100, 0, -100, -4.371139e-06, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
+material_override = SubResource("StandardMaterial3D_qxfrk")
+mesh = SubResource("QuadMesh_a0tk4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane"]
+shape = SubResource("ConvexPolygonShape3D_r3fl7")
+
+[node name="CharacterBody" parent="." instance=ExtResource("2_qxfrk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0340389, 0)
+
+[node name="OmniLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.69673955, 0.7173242, 0, -0.7173242, 0.69673955, 5.8926215, 3.7490473, 11.099789)
+light_color = Color(1, 1, 0.90588236, 1)
+
+[node name="CrouchTest" type="StaticBody3D" parent="."]
+transform = Transform3D(8.197003, 0, 0, 0, 0.4234674, 0, 0, 0, 6.7810035, 0, 2.5824852, 11.686766)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CrouchTest"]
+mesh = SubResource("BoxMesh_16bn6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrouchTest"]
+shape = SubResource("ConvexPolygonShape3D_qxfrk")
